@@ -34,6 +34,7 @@ Last updated: 2026-03-28
 - SwimSum Coaches Stopwatch (existing, separate sub-app)
 - Swimmer converter/calculator app(s) (planned)
 - SwimSum - CSS Swim Test (this project)
+- Broader **SwimSum family / swimmer-hub** intent (accounts, data, future apps): see append-only **Progress log** entry **2026-03-28 (later)** — not implemented in this repo.
 
 ## Next actions
 
@@ -105,5 +106,25 @@ Last updated: 2026-03-28
 
 - Layout widened (wrap ~1024px), SwimSum app screenshots moved **below** the calculator with explicit “instant workouts” copy.
 - Results replace the form in one card; **skyline-style** reference towers and positive tier messaging replaced older “novice band” wording and horizontal bar comparison.
+
+### 2026-03-28 (later) — Skyline copy + swimmer-centric ecosystem notes
+
+**Skyline UX (site behaviour)**
+
+- Static **“what you’re looking at”** bullets before the chart: height = speed, colours = separate fiction examples (not leagues), green outline = user, hover/long-press for longer hints.
+- Each reference tower gets a **short subtitle** (`tagline`) under the pace; full text in `title` / aria-label for accessibility.
+- After calculate, a **green narration box** under the chart states in plain language: fictional examples, taller = faster, user’s CSS, and **nearest reference column** by seconds.
+- Purpose: reduce “pretty but meaningless” — swimmers and coaches see **what the graphic is telling them** without assuming colours are competitive divisions.
+
+**Ecosystem vision (product / architecture intent — not implemented)**
+
+- **Swimmer-centred hub (parallel idea to patient-centred records):** long-term goal is that **one swimmer identity** (account / profile) anchors data: CSS test history over time, fastest times from timing/stopwatch apps, workouts generated or logged, optional video references, season plans (e.g. tri vs pool), and future tools. **This CSS site** is today a standalone **static web calculator** with no auth; native **CSS Swim Test app** is not shipped yet.
+- **App family (current or planned names, separate codebases where noted):**
+  - **SwimSum main app** — workout generator (`swimsum.com`, Android; email list / marketing underway).
+  - **SwimSum Coaches Stopwatch** — deck timer / lanes (existing sub-project under main SwimSum repo elsewhere).
+  - **CSS Swim Test** — this Firebase-hosted site (`cssswimtest.com`); future app + saved history TBD.
+  - **Swimmer calculator / converter (planned)** — distance, time, yards, metres, tables; **masters qualifying** or federation times where we can source reliable data; **UK / legacy conversion** ideas (e.g. different pool lengths affecting qualifying standards in historical national systems) flagged for **future research** — verify current rules before building.
+- **Commerce / identity:** aspiration that **buying one SwimSum-family app** could eventually **unlock or bundle** siblings (policy TBD — Play billing, account linking, legal). **Central data store** would aggregate only with explicit user consent and privacy design; no shared backend exists for CSS site yet.
+- **Cross-project references:** Capisco and other non-SwimSum products mentioned by stakeholders are **out of scope** for this repository; analogy only (“everything hangs off the swimmer”) is captured here for planning, not as technical coupling.
 
 

@@ -51,34 +51,54 @@ function getEngine(dropoff) {
 
 const SKYLINE_REFERENCES = [
   {
+    key: "oly",
     label: "Olympian\nvicinity",
     example: "~1:02",
     sec: 62,
     gradient: "linear-gradient(180deg, #fde047 0%, #ca8a04 100%)",
+    tagline: "Example: Olympic-distance finalist–level aerobic pace (not a ranking).",
+    explain:
+      "Gold ≈ very fast threshold — think Olympic-distance finalists’ kind of aerobic speed (public example only). Hover any column for the full note.",
   },
   {
+    key: "college",
     label: "College /\nnational",
     example: "~1:12",
     sec: 72,
     gradient: "linear-gradient(180deg, #93c5fd 0%, #1d4ed8 100%)",
+    tagline: "Example: elite college / national-age aerobic territory.",
+    explain:
+      "Blue ≈ elite college / national-age aerobic territory — still rare; not a label on you.",
   },
   {
+    key: "club",
     label: "Strong club /\nAG",
     example: "~1:25",
     sec: 85,
     gradient: "linear-gradient(180deg, #6ee7b7 0%, #047857 100%)",
+    tagline: "Example: strong club or age-group racer.",
+    explain:
+      "Green ≈ strong club or age-group racer threshold — serious training, many meets.",
   },
   {
+    key: "masters",
     label: "Masters\nfitness",
     example: "~1:40",
     sec: 100,
     gradient: "linear-gradient(180deg, #c4b5fd 0%, #6d28d9 100%)",
+    tagline: "Example: fit masters or adult fitness swimmer.",
+    explain:
+      "Purple ≈ spirited masters or fit adult swimmer — wide age range can land here.",
   },
   {
+    key: "tri",
     label: "Tri steady\nfork",
     example: "~1:48",
     sec: 108,
     gradient: "linear-gradient(180deg, #fdba74 0%, #ea580c 100%)",
+    tagline: "Example: steady iron-distance swim training pace (broad range).",
+    explain:
+      "Orange ≈ steady iron-distance swim training fork for many triathletes (huge individual spread).",
   },
 ];
 
@@ -141,6 +161,19 @@ function userGradientForTone(toneClass) {
   return map[toneClass] || map["tone-solid"];
 }
 
+function nearestReference(userSec) {
+  let best = SKYLINE_REFERENCES[0];
+  let bestDiff = Math.abs(userSec - best.sec);
+  for (const ref of SKYLINE_REFERENCES) {
+    const d = Math.abs(userSec - ref.sec);
+    if (d < bestDiff) {
+      best = ref;
+      bestDiff = d;
+    }
+  }
+  return best;
+}
+
 function renderSkyline(userSec, toneClass) {
   const root = document.getElementById("skyline-root");
   if (!root) return;
@@ -149,25 +182,52 @@ function renderSkyline(userSec, toneClass) {
   SKYLINE_REFERENCES.forEach((ref) => {
     const tower = document.createElement("div");
     tower.className = "sky-tower";
+    tower.setAttribute("role", "img");
+    tower.setAttribute("aria-label", `${ref.label.replace(/\n/g, " ")}: ${ref.explain}`);
+    tower.title = ref.explain;
     const h = towerHeightPercent(ref.sec);
+    const sub = document.createElement("div");
+    sub.className = "sky-mean";
+    sub.textContent = ref.tagline;
     tower.innerHTML = `
       <div class="sky-block" style="height:${h}%;background:${ref.gradient}"></div>
       <span class="sky-cap">${ref.label.replace(/\n/g, " ")}</span>
       <span class="sky-pace">${ref.example}</span>
     `;
+    tower.appendChild(sub);
     root.appendChild(tower);
   });
 
   const you = document.createElement("div");
   you.className = "sky-tower sky-tower--you";
+  you.setAttribute("role", "img");
+  you.title = "Your CSS from your 400 m and 200 m trials — this block’s height matches your pace.";
   const yh = towerHeightPercent(userSec);
   const grad = userGradientForTone(toneClass);
+  const near = nearestReference(userSec);
+  const youSub = document.createElement("div");
+  youSub.className = "sky-mean sky-mean--you";
+  youSub.textContent = `Your pace — near the “${near.label.replace(/\n/g, " ")}” example on this chart.`;
   you.innerHTML = `
     <div class="sky-block sky-block--you" style="height:${yh}%;background:${grad}"></div>
     <span class="sky-cap sky-cap--you">You</span>
     <span class="sky-pace">${formatMinSec(userSec)}</span>
   `;
+  you.appendChild(youSub);
   root.appendChild(you);
+
+  const narr = document.getElementById("skyline-narration");
+  if (narr) {
+    const userLabel = formatMinSec(userSec);
+    narr.innerHTML = `
+      <strong>Reading this for your swimmer:</strong>
+      Each coloured column is a <em>fictional example swimmer’s</em> CSS (threshold pace per 100 m), not a league or medal.
+      <strong>Taller = faster</strong> (less time per 100 m).
+      Your CSS is <strong>${userLabel}</strong> per 100 m — on this toy map you sit closest to the
+      <strong>${near.label.replace(/\n/g, " ")}</strong> column (~${near.example}).
+      Use it as a conversation starter; your age group and sport change what “great” means.
+    `;
+  }
 }
 
 function setInputFromSeconds(inputEl, seconds) {
