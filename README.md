@@ -17,6 +17,8 @@ Remaining MVP items from `project-state.md`: local save/load, export/share — n
 
 See **`project-state.md`** for full product state, hosting notes, and append-only progress log.
 
+**Source:** [github.com/jkellyllekj/swimsum-css-swim-test](https://github.com/jkellyllekj/swimsum-css-swim-test)
+
 ## Quick start
 
 1. Open this folder in Cursor as its own workspace:
