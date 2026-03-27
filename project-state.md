@@ -67,7 +67,7 @@ Last updated: 2026-03-27
 
 - CSS pace per 100m: `(T400 − T200) / 2` seconds, displayed as `m:ss`.
 - Estimated 1500m: CSS seconds × 15, displayed as `m:ss`.
-- Engine profile from drop-off between CSS pace and average pace inside the 400 (`pace400 = T400/4`): Diesel if dropoff &lt; 3s; Sprinter if &gt; 8s; else Balanced.
+- Engine profile from drop-off between CSS pace and average pace inside the 400 (`pace400 = T400/4`): Diesel if drop-off under 3 s; Sprinter if over 8 s; else Balanced.
 - Time input: type `m:ss` (e.g. `6:40`) or total seconds; blur normalizes to `m:ss`. Per-field **−/+ 5s** nudge buttons for quicker adjustment.
 - Validation: both times required; 200m must be faster than 400m total time.
 - Visual comparison: horizontal pace bars (Pro ~1:00, Club ~1:20, Novice ~2:00) plus user bar scaled by pace (faster = wider bar in current mapping).
@@ -86,4 +86,5 @@ Last updated: 2026-03-27
 
 **Repository**
 
-- Git initialized and commits tracked from this date forward in this folder (see git log for commit messages).
+- Git initialized in this project folder; default branch **main**.
+- Remote: **https://github.com/jkellyllekj/swimsum-css-swim-test** (`origin`). Initial commit pushed 2026-03-27.
