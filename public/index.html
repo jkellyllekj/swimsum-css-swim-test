@@ -1,151 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SwimSum - CSS Swim Test | CSSSwimTest.com</title>
-    <meta
-      name="description"
-      content="Understand Critical Swim Speed (CSS), test your pace, and get personalized training guidance for swimmers and coaches."
-    />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="brand">
-        <img
-          class="brand-logo"
-          src="https://swimsum.com/assets/swimsum-logo.png"
-          alt="SwimSum logo"
-        />
-        <div>
-          <p class="brand-name">SwimSum</p>
-          <p class="brand-sub">Create an instant workout! | CSS Swim Test</p>
-        </div>
-      </div>
-      <div class="store-links" aria-label="SwimSum app stores">
-        <a href="https://play.google.com/store/apps/details?id=com.creativearts.swimsum" target="_blank" rel="noopener">
-          <img
-            class="store-badge"
-            src="https://swimsum.com/assets/google-play-badge-cropped.png"
-            alt="Get it on Google Play"
-          />
-        </a>
-        <img
-          class="store-badge"
-          src="https://swimsum.com/assets/app-store-coming-soon.png"
-          alt="Coming soon to the App Store"
-        />
-      </div>
-    </header>
-
-    <main class="shell">
-      <section class="content">
-        <article class="card intro">
-          <h1>Find your Critical Swim Speed</h1>
-          <p>
-            CSS estimates your threshold pace: the fastest speed you can hold for longer efforts without fading hard.
-          </p>
-          <ol class="steps">
-            <li><span>1</span>Swim a hard 400m time trial.</li>
-            <li><span>2</span>Rest fully, then swim a hard 200m time trial.</li>
-            <li><span>3</span>Enter both times to get CSS pace and training guidance.</li>
-          </ol>
-          <h2>What the result means</h2>
-          <p>
-            The difference between your 200m and 400m performances helps classify your engine profile.
-          </p>
-          <ul>
-            <li><strong>Diesel:</strong> good endurance, needs speed/power work.</li>
-            <li><strong>Balanced:</strong> strong mix of speed and endurance.</li>
-            <li><strong>Sprinter:</strong> fast speed, needs aerobic endurance support.</li>
-          </ul>
-          <h2>Benchmarks (pace per 100m)</h2>
-          <p class="bench-text">
-            World Class: 0:58-1:05 | Competitive: 1:10-1:25 | Intermediate: 1:30-1:50 | Novice: 2:00+
-          </p>
-          <div class="mini-note">
-            Tip: Use CSS pace to set threshold sets and to monitor progress every 4-6 weeks.
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SwimSum: CSS Swim Test</title>
+  <meta name="description" content="Critical Swim Speed (CSS) calculator from SwimSum. Enter your 400 m and 200 m time trials for threshold pace and training context.">
+  <meta property="og:title" content="SwimSum — CSS Swim Test">
+  <meta property="og:description" content="Calculate Critical Swim Speed from 400 m and 200 m time trials.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cssswimtest.com/">
+  <meta property="og:image" content="https://swimsum.com/screenshots/phone-4-fb.png">
+  <meta property="og:image:width" content="360">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:type" content="image/png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SwimSum — CSS Swim Test">
+  <meta name="twitter:description" content="Calculate Critical Swim Speed from 400 m and 200 m time trials.">
+  <meta name="twitter:image" content="https://swimsum.com/screenshots/phone-4-fb.png">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="header-row">
+      <div class="brand-word">
+        <div class="brand-top">
+          <img class="brand-logo" src="https://swimsum.com/assets/swimsum-logo.png" width="56" height="56" alt="SwimSum logo" decoding="async">
+          <div class="brand-text">
+            <h1>SwimSum</h1>
+            <p class="tagline">Create an instant workout!</p>
           </div>
-        </article>
-
-        <aside class="card calc">
-          <h2>CSS Calculator</h2>
-          <p class="calc-sub">Use format <code>m:ss</code> (example: <code>6:40</code>).</p>
-
-          <form id="css-form" novalidate>
-            <div class="input-group">
-              <label for="t400">400m time trial</label>
-              <div class="time-entry">
-                <button type="button" class="time-nudge" data-target="t400" data-delta="-5">-5s</button>
-                <input id="t400" type="text" inputmode="numeric" placeholder="6:40" required />
-                <button type="button" class="time-nudge" data-target="t400" data-delta="5">+5s</button>
-              </div>
-            </div>
-
-            <div class="input-group">
-              <label for="t200">200m time trial</label>
-              <div class="time-entry">
-                <button type="button" class="time-nudge" data-target="t200" data-delta="-5">-5s</button>
-                <input id="t200" type="text" inputmode="numeric" placeholder="3:10" required />
-                <button type="button" class="time-nudge" data-target="t200" data-delta="5">+5s</button>
-              </div>
-            </div>
-
-            <button id="calc-btn" type="submit">Calculate My CSS</button>
-            <p id="error" class="error" aria-live="polite"></p>
-          </form>
-
-          <section id="results" class="results hidden" aria-live="polite">
-            <div class="metric">
-              <p class="label">CSS pace</p>
-              <p id="cssDisplay" class="value">--:--</p>
-              <p class="hint">per 100m</p>
-            </div>
-            <div class="metric">
-              <p class="label">Estimated 1500m</p>
-              <p id="est1500" class="value small">--:--</p>
-            </div>
-            <div class="metric">
-              <p class="label">Engine profile</p>
-              <p id="engineType" class="engine">--</p>
-              <p id="adviceText" class="advice"></p>
-            </div>
-            <div class="metric">
-              <p class="label">Pace comparison</p>
-              <div class="bar-row"><span>Pro</span><div class="bar-track"><div class="bar bar-pro"></div></div><em>1:00</em></div>
-              <div class="bar-row"><span>You</span><div class="bar-track"><div id="userBar" class="bar bar-you"></div></div><em id="userBarLabel">--:--</em></div>
-              <div class="bar-row"><span>Club</span><div class="bar-track"><div class="bar bar-club"></div></div><em>1:20</em></div>
-              <div class="bar-row"><span>Novice</span><div class="bar-track"><div class="bar bar-novice"></div></div><em>2:00</em></div>
-            </div>
-            <div class="metric compare-card">
-              <p class="label">Your benchmark band</p>
-              <p id="levelText" class="engine">--</p>
-              <p id="gapText" class="advice">--</p>
-            </div>
-          </section>
-        </aside>
-      </section>
-
-      <section class="card family">
-        <h2>SwimSum App Family</h2>
-        <div class="family-grid">
-          <article>
-            <h3>SwimSum Main App</h3>
-            <p>Generate structured swim workouts instantly for swimmers and coaches.</p>
-          </article>
-          <article>
-            <h3>Coaches Stopwatch</h3>
-            <p>Run lanes, capture times, and manage sessions poolside.</p>
-          </article>
-          <article>
-            <h3>CSS Swim Test</h3>
-            <p>Benchmark threshold pace and align training to your profile.</p>
-          </article>
         </div>
-      </section>
-    </main>
-    <script src="./script.js"></script>
-  </body>
-</html>
+      </div>
 
+      <div class="top-cta" aria-label="Get the app">
+        <a href="https://play.google.com/store/apps/details?id=com.creativearts.swimsum" class="store-badge-link" target="_blank" rel="noopener">
+          <img class="store-badge" src="https://swimsum.com/assets/google-play-badge-cropped.png" alt="Get it on Google Play">
+        </a>
+        <img class="store-badge" src="https://swimsum.com/assets/app-store-coming-soon.png" alt="Coming soon to the App Store">
+      </div>
+    </div>
+
+    <p class="intro-css-line">
+      <strong>Critical Swim Speed (CSS)</strong> is a short pool test (400 m and 200 m) that estimates your sustainable threshold pace per 100 m — useful for tempo sets and tracking progress, not for comparing yourself harshly to anyone else.
+    </p>
+
+    <ol class="steps" aria-label="How the CSS test works">
+      <li data-step="1"><strong>Swim 400 m</strong> – Hard, even time trial in the pool you train in.</li>
+      <li data-step="2"><strong>Recover fully, then swim 200 m</strong> – Same intensity; your 200 m should be faster per 100 m than your 400 m average.</li>
+      <li data-step="3"><strong>Use the calculator below</strong> – Enter both times to see your CSS, a simple skyline of where that sits next to familiar reference levels, and how your sprint vs endurance shape lines up.</li>
+    </ol>
+
+    <div class="premium-coming calc-hub" id="calc-hub" aria-label="CSS calculator and results">
+      <div id="calc-phase">
+        <h2>CSS calculator</h2>
+        <p>
+          Type each time as <strong>m:ss</strong> (minutes, colon, seconds). A plain number is read as total seconds.
+          <strong>Example trials</strong> are already filled in (<strong>6:40</strong> for 400 m, <strong>3:10</strong> for 200 m) so you can tap <strong>Calculate CSS</strong> once and see a full demo — then swap in your own times.
+        </p>
+        <p class="calc-roadmap-note">
+          Saving CSS history over time will tie into a future SwimSum sign-in (same idea as saving workouts and timer sessions); this page is calculator-only for now.
+        </p>
+
+        <form id="css-form" novalidate>
+          <div class="calc-field">
+            <label for="t400">400 m</label>
+            <input id="t400" type="text" inputmode="decimal" autocomplete="off" placeholder="6:40" value="6:40" required>
+            <details class="optional-refine">
+              <summary>Fine-tune ±5 seconds</summary>
+              <div class="fine-row">
+                <button type="button" class="btn-nudge time-nudge" data-target="t400" data-delta="-5">−5s</button>
+                <button type="button" class="btn-nudge time-nudge" data-target="t400" data-delta="5">+5s</button>
+              </div>
+            </details>
+          </div>
+          <div class="calc-field">
+            <label for="t200">200 m</label>
+            <input id="t200" type="text" inputmode="decimal" autocomplete="off" placeholder="3:10" value="3:10" required>
+            <details class="optional-refine">
+              <summary>Fine-tune ±5 seconds</summary>
+              <div class="fine-row">
+                <button type="button" class="btn-nudge time-nudge" data-target="t200" data-delta="-5">−5s</button>
+                <button type="button" class="btn-nudge time-nudge" data-target="t200" data-delta="5">+5s</button>
+              </div>
+            </details>
+          </div>
+          <button id="calc-btn" class="cta" type="submit">Calculate CSS</button>
+          <p id="error" class="form-error" role="alert"></p>
+        </form>
+      </div>
+
+      <div id="results-phase" class="hidden" aria-live="polite">
+        <div id="results-inner" class="results-inner">
+          <h3 class="results-heading">Your CSS snapshot</h3>
+
+          <div class="result-hero result-hero--pop">
+            <span class="lbl">CSS pace</span>
+            <span id="cssDisplay" class="big">--:--</span>
+            <span class="sub">per 100 m (threshold-style)</span>
+          </div>
+
+          <div class="result-row2">
+            <div class="result-mini">
+              <span class="lbl">Rough 1500 m idea</span>
+              <span id="est1500" class="val">--:--</span>
+            </div>
+            <div class="result-mini">
+              <span class="lbl">Engine style</span>
+              <span id="engineType" class="val val--band">--</span>
+            </div>
+          </div>
+
+          <div class="result-profile">
+            <span class="lbl">Training flavour</span>
+            <p id="adviceText" class="txt"></p>
+          </div>
+
+          <div class="tier-callout">
+            <p id="levelText" class="tier-title"></p>
+            <p id="gapText" class="tier-detail"></p>
+          </div>
+
+          <div class="skyline-section">
+            <p class="skyline-label">Reference “city line” — taller blocks are faster CSS (rough public examples only)</p>
+            <div class="skyline-board">
+              <div class="skyline-axis" aria-hidden="true">
+                <span class="sky-axis-top">faster</span>
+                <span class="sky-axis-mid">pace per 100 m</span>
+                <span class="sky-axis-bot">more room to grow</span>
+              </div>
+              <div id="skyline-root" class="skyline"></div>
+            </div>
+            <p class="skyline-foot">Your tower is highlighted. Ranges shift with age, distance focus, and sport — the point is progress and smart training, not labels.</p>
+          </div>
+
+          <button type="button" id="recalc-btn" class="cta cta--secondary">Enter new times</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="lead-copy">This page lives at <strong>cssswimtest.com</strong>. For full workout generation (warm-up through cool-down), use the SwimSum app — preview below.</p>
+
+    <div class="premium-coming swimsum-showcase" aria-label="SwimSum workout app">
+      <h2>Want instant workouts instead?</h2>
+      <p><strong>SwimSum</strong> on Android builds structured sessions for any pool length — the screenshots are from that app, not from the CSS test. Grab it on Google Play or read more at <a href="https://swimsum.com/" target="_blank" rel="noopener">swimsum.com</a>.</p>
+      <div class="screenshots screenshots--promo" aria-label="SwimSum app screenshots">
+        <div class="screenshot">
+          <img src="https://swimsum.com/screenshots/phone-1.png" alt="SwimSum app – workout with warm up, build, main, sprint, cool down">
+        </div>
+        <div class="screenshot">
+          <img src="https://swimsum.com/screenshots/phone-2.png" alt="SwimSum app – technique workout with dolphin effort levels">
+        </div>
+        <div class="screenshot">
+          <img src="https://swimsum.com/screenshots/phone-3.png" alt="SwimSum app – longer workout with main sets and pull">
+        </div>
+        <div class="screenshot">
+          <img src="https://swimsum.com/screenshots/phone-4.png" alt="SwimSum app – longer mixed workout with multiple effort sections">
+        </div>
+      </div>
+    </div>
+
+    <div class="premium-coming" aria-label="Reference pacing guide">
+      <h2>Who swims what? (very rough CSS per 100 m)</h2>
+      <p>These are conversation starters — age, stroke, pool, and triathlon vs pool focus all move the numbers. We avoid words like “novice band”; a 2:00 per 100 m can be a great milestone for one athlete and a warm-up for another.</p>
+      <ul>
+        <li><strong>Olympian / WC final night:</strong> often roughly 0:55–1:05 per 100 m freestyle CSS-style estimates for distance swimmers.</li>
+        <li><strong>NCAA / national-age excellence:</strong> often roughly 1:05–1:15 for many distance-focused racers.</li>
+        <li><strong>Strong college club or serious 18–35 triathlete swim:</strong> often roughly 1:15–1:30.</li>
+        <li><strong>Competitive masters (varies by age &amp; event):</strong> many land roughly 1:20–1:45 — wide bands because 25-year-olds and 65-year-olds both race masters.</li>
+        <li><strong>“Comfortable” iron-distance swim fork:</strong> many finishers trend roughly 1:50–2:15 per 100 m in steady open-water style training when mapped back to the pool — highly individual.</li>
+        <li><strong>Diesel / Balanced / Sprinter:</strong> still describe how your 200 m compares to your 400 m — not “good or bad”, just what to emphasise next in training.</li>
+      </ul>
+    </div>
+
+    <div class="links">
+      <a href="https://swimsum.com/privacy.html" target="_blank" rel="noopener">Privacy policy</a>
+      <a href="https://groups.google.com/g/swimsum" target="_blank" rel="noopener">Community &amp; feedback (Google Group)</a>
+    </div>
+
+    <footer>
+      <p>SwimSum – Swim Workout Generator. &copy; 2026 CREATIVE ARTS GLOBAL LTD. All rights reserved.</p>
+    </footer>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>

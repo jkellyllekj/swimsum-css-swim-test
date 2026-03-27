@@ -1,6 +1,6 @@
 # SwimSum - CSS Swim Test - Project State
 
-Last updated: 2026-03-27
+Last updated: 2026-03-28
 
 ## Product
 
@@ -88,3 +88,22 @@ Last updated: 2026-03-27
 
 - Git initialized in this project folder; default branch **main**.
 - Remote: **https://github.com/jkellyllekj/swimsum-css-swim-test** (`origin`). Initial commit pushed 2026-03-27.
+
+### 2026-03-28 — Demo times, clearer validation, UI evolution notes
+
+**Calculator demo behaviour**
+
+- Inputs ship with **real default values** in the `value` attribute (not only `placeholder`): **400 m = 6:40**, **200 m = 3:10**. That way a first tap on **Calculate CSS** always runs the full result path; newcomers were previously seeing validation errors because empty fields do not satisfy `parseTimeInput`.
+- Copy explains that these are **example trials**; users replace with their own pool times after seeing the flow.
+- Error strings were clarified for bad format, zero times, and 200 m not faster than 400 m total.
+
+**Product direction (not implemented)**
+
+- **SwimSum sign-in ecosystem (future):** intent is for one account to eventually hold saved **CSS test history**, **timer / stopwatch data**, and **generated workouts**, unified across apps. This static Firebase page has **no backend or auth** yet; a short on-page note sets that expectation without promising dates.
+
+**Recent UX (since earlier March log)**
+
+- Layout widened (wrap ~1024px), SwimSum app screenshots moved **below** the calculator with explicit “instant workouts” copy.
+- Results replace the form in one card; **skyline-style** reference towers and positive tier messaging replaced older “novice band” wording and horizontal bar comparison.
+
+
