@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SwimSum - CSS Swim Test | CSSSwimTest.com</title>
+    <meta
+      name="description"
+      content="Understand Critical Swim Speed (CSS), test your pace, and get personalized training guidance for swimmers and coaches."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="https://swimsum.com/assets/swimsum-logo.png"
+          alt="SwimSum logo"
+        />
+        <div>
+          <p class="brand-name">SwimSum</p>
+          <p class="brand-sub">Create an instant workout! | CSS Swim Test</p>
+        </div>
+      </div>
+      <div class="store-links" aria-label="SwimSum app stores">
+        <a href="https://play.google.com/store/apps/details?id=com.creativearts.swimsum" target="_blank" rel="noopener">
+          <img
+            class="store-badge"
+            src="https://swimsum.com/assets/google-play-badge-cropped.png"
+            alt="Get it on Google Play"
+          />
+        </a>
+        <img
+          class="store-badge"
+          src="https://swimsum.com/assets/app-store-coming-soon.png"
+          alt="Coming soon to the App Store"
+        />
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="content">
+        <article class="card intro">
+          <h1>Find your Critical Swim Speed</h1>
+          <p>
+            CSS estimates your threshold pace: the fastest speed you can hold for longer efforts without fading hard.
+          </p>
+          <ol class="steps">
+            <li><span>1</span>Swim a hard 400m time trial.</li>
+            <li><span>2</span>Rest fully, then swim a hard 200m time trial.</li>
+            <li><span>3</span>Enter both times to get CSS pace and training guidance.</li>
+          </ol>
+          <h2>What the result means</h2>
+          <p>
+            The difference between your 200m and 400m performances helps classify your engine profile.
+          </p>
+          <ul>
+            <li><strong>Diesel:</strong> good endurance, needs speed/power work.</li>
+            <li><strong>Balanced:</strong> strong mix of speed and endurance.</li>
+            <li><strong>Sprinter:</strong> fast speed, needs aerobic endurance support.</li>
+          </ul>
+          <h2>Benchmarks (pace per 100m)</h2>
+          <p class="bench-text">
+            World Class: 0:58-1:05 | Competitive: 1:10-1:25 | Intermediate: 1:30-1:50 | Novice: 2:00+
+          </p>
+          <div class="mini-note">
+            Tip: Use CSS pace to set threshold sets and to monitor progress every 4-6 weeks.
+          </div>
+        </article>
+
+        <aside class="card calc">
+          <h2>CSS Calculator</h2>
+          <p class="calc-sub">Use format <code>m:ss</code> (example: <code>6:40</code>).</p>
+
+          <form id="css-form" novalidate>
+            <div class="input-group">
+              <label for="t400">400m time trial</label>
+              <div class="time-entry">
+                <button type="button" class="time-nudge" data-target="t400" data-delta="-5">-5s</button>
+                <input id="t400" type="text" inputmode="numeric" placeholder="6:40" required />
+                <button type="button" class="time-nudge" data-target="t400" data-delta="5">+5s</button>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="t200">200m time trial</label>
+              <div class="time-entry">
+                <button type="button" class="time-nudge" data-target="t200" data-delta="-5">-5s</button>
+                <input id="t200" type="text" inputmode="numeric" placeholder="3:10" required />
+                <button type="button" class="time-nudge" data-target="t200" data-delta="5">+5s</button>
+              </div>
+            </div>
+
+            <button id="calc-btn" type="submit">Calculate My CSS</button>
+            <p id="error" class="error" aria-live="polite"></p>
+          </form>
+
+          <section id="results" class="results hidden" aria-live="polite">
+            <div class="metric">
+              <p class="label">CSS pace</p>
+              <p id="cssDisplay" class="value">--:--</p>
+              <p class="hint">per 100m</p>
+            </div>
+            <div class="metric">
+              <p class="label">Estimated 1500m</p>
+              <p id="est1500" class="value small">--:--</p>
+            </div>
+            <div class="metric">
+              <p class="label">Engine profile</p>
+              <p id="engineType" class="engine">--</p>
+              <p id="adviceText" class="advice"></p>
+            </div>
+            <div class="metric">
+              <p class="label">Pace comparison</p>
+              <div class="bar-row"><span>Pro</span><div class="bar-track"><div class="bar bar-pro"></div></div><em>1:00</em></div>
+              <div class="bar-row"><span>You</span><div class="bar-track"><div id="userBar" class="bar bar-you"></div></div><em id="userBarLabel">--:--</em></div>
+              <div class="bar-row"><span>Club</span><div class="bar-track"><div class="bar bar-club"></div></div><em>1:20</em></div>
+              <div class="bar-row"><span>Novice</span><div class="bar-track"><div class="bar bar-novice"></div></div><em>2:00</em></div>
+            </div>
+            <div class="metric compare-card">
+              <p class="label">Your benchmark band</p>
+              <p id="levelText" class="engine">--</p>
+              <p id="gapText" class="advice">--</p>
+            </div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="card family">
+        <h2>SwimSum App Family</h2>
+        <div class="family-grid">
+          <article>
+            <h3>SwimSum Main App</h3>
+            <p>Generate structured swim workouts instantly for swimmers and coaches.</p>
+          </article>
+          <article>
+            <h3>Coaches Stopwatch</h3>
+            <p>Run lanes, capture times, and manage sessions poolside.</p>
+          </article>
+          <article>
+            <h3>CSS Swim Test</h3>
+            <p>Benchmark threshold pace and align training to your profile.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
+

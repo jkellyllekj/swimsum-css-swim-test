@@ -1,0 +1,89 @@
+# SwimSum - CSS Swim Test - Project State
+
+Last updated: 2026-03-27
+
+## Product
+
+- Name: **SwimSum - CSS Swim Test**
+- Domain target: **CSSSwimTest.com**
+- Relationship: SwimSum sub-product, standalone codebase/release.
+
+## Scope (MVP)
+
+1. Swim test input workflows (coach/swimmer friendly).
+2. Computed outputs from test values.
+3. Mobile-first UI.
+4. Save/load recent entries locally.
+5. Export/share result summary.
+6. Basic SEO-ready website shell.
+
+## Architecture decision
+
+- Keep this as a separate project from `swimgen2`.
+- Do not couple release cadence with existing SwimSum apps.
+
+## Working model
+
+- Use this file as the source of truth for this project only.
+- Append updates; do not prune historical context.
+- Keep steps practical and short (one concrete action at a time when needed).
+
+## Related ecosystem (reference only)
+
+- SwimSum main app (existing, separate project)
+- SwimSum Coaches Stopwatch (existing, separate sub-app)
+- Swimmer converter/calculator app(s) (planned)
+- SwimSum - CSS Swim Test (this project)
+
+## Next actions
+
+1. Confirm exact MVP test formulas and required fields.
+2. Choose initial stack (simple static app + JS logic).
+3. Build first interactive screen + calculation output.
+4. Define hosting/deploy path for `CSSSwimTest.com`.
+
+---
+
+## Progress log (append-only)
+
+### 2026-03-27 — Stack, hosting, domain, and site implementation
+
+**Stack**
+
+- Static site: HTML, CSS, and vanilla JavaScript only.
+- Source files live under `public/` (`index.html`, `styles.css`, `script.js`).
+- Deploy target: **Firebase Hosting** via `firebase.json` (public directory: `public`).
+- Firebase CLI: global install; project linked with `.firebaserc` default project **`cssswimtest`**.
+- Default Firebase Hosting URL: `https://cssswimtest.web.app`
+- Custom domain: **`cssswimtest.com`** registered at Porkbun; DNS updated per Firebase Hosting instructions (root `A` to Firebase IP, verification `TXT`; conflicting prior root `ALIAS` to Porkbun builder removed). Domain verified and site live on custom domain as of this session.
+
+**Branding and content**
+
+- Header uses SwimSum assets from production marketing site (same as `swimsum.com`): logo `https://swimsum.com/assets/swimsum-logo.png`, Google Play badge, App Store coming-soon badge; Play link uses package id `com.creativearts.swimsum`.
+- Page structure: miniature marketing site — left column (stacked on mobile) explains Critical Swim Speed (CSS), test protocol (400m then 200m trials), engine profiles (Diesel / Balanced / Sprinter), benchmark text bands; right column sticky calculator on wide viewports.
+- Footer-style section: “SwimSum App Family” placeholder cards (main app, Coaches Stopwatch, CSS Swim Test) for future copy and links.
+
+**Calculator behavior**
+
+- CSS pace per 100m: `(T400 − T200) / 2` seconds, displayed as `m:ss`.
+- Estimated 1500m: CSS seconds × 15, displayed as `m:ss`.
+- Engine profile from drop-off between CSS pace and average pace inside the 400 (`pace400 = T400/4`): Diesel if dropoff &lt; 3s; Sprinter if &gt; 8s; else Balanced.
+- Time input: type `m:ss` (e.g. `6:40`) or total seconds; blur normalizes to `m:ss`. Per-field **−/+ 5s** nudge buttons for quicker adjustment.
+- Validation: both times required; 200m must be faster than 400m total time.
+- Visual comparison: horizontal pace bars (Pro ~1:00, Club ~1:20, Novice ~2:00) plus user bar scaled by pace (faster = wider bar in current mapping).
+- Benchmark band card: classifies pace into World Class / Competitive / Intermediate / Novice style bands with short gap messaging (not medical advice; training-oriented copy).
+
+**MVP scope — still open (not yet built)**
+
+- Local persistence (save/load recent trials).
+- Export or share result summary (e.g. copy text, share URL fragment, or simple download).
+- Any backend or user accounts (explicitly out of scope for current static MVP).
+
+**Operational notes**
+
+- Porkbun DNS panel may show “Powered by Cloudflare” while nameservers remain Porkbun; propagation for `TXT` verification can lag after `A` is detected.
+- Firebase free tier used; multiple small Hosting projects are generally fine; confirm quotas in Google Cloud / Firebase console if scaling.
+
+**Repository**
+
+- Git initialized and commits tracked from this date forward in this folder (see git log for commit messages).
